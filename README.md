@@ -92,8 +92,8 @@ This script performs comprehensive health checks and status monitoring:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/openstack-deployment.git
-cd openstack-deployment
+git clone https://github.com/Telxey/openstack.git
+cd openstack
 ```
 
 ### Step 2: Prepare the Environment
