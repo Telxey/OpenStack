@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo 'Part 9: Monitor Deployment'
+
+# Watch deployment progress
+juju status --watch 5s
+
+
+
+
+

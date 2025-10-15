@@ -28,6 +28,8 @@ sudo lvcreate -L 30G -n network-lv openstack-vg     # Neutron, Octavia, Designat
 sudo lvcreate -L 50G -n dashboard-lv openstack-vg    # Horizon, Skyline, Kitti
 sudo lvcreate -L 150G -n storage-lv openstack-vg     # Glance, Cinder, Manila
 sudo lvcreate -L 25G -n identity-lv openstack-vg     # Keystone
+sudo lvcreate -L 25G -n monitoring-lv openstack-vg     # Ceilemeter
+
 
 # Create tier logical volumes
 sudo lvcreate -L 900G -n tier1-lv tier1-vg           # High-performance VMs/volumes
@@ -42,6 +44,7 @@ sudo mkfs.xfs /dev/openstack-vg/network-lv
 sudo mkfs.xfs /dev/openstack-vg/dashboard-lv
 sudo mkfs.xfs /dev/openstack-vg/storage-lv
 sudo mkfs.xfs /dev/openstack-vg/identity-lv
+sudo mkfs.xfs /dev/openstack-vg/monitoring-lv
 sudo mkfs.xfs /dev/tier3-vg/tier3-lv
 
 # Create mount directories
@@ -52,6 +55,7 @@ sudo mkdir -p /var/lib/network
 sudo mkdir -p /var/lib/dashboard
 sudo mkdir -p /var/lib/storage
 sudo mkdir -p /var/lib/identity
+sudo mkdir -p /var/lib/monitoring
 sudo mkdir -p /var/lib/backup
 
 # Mount the logical volumes
@@ -72,15 +76,5 @@ echo "/dev/openstack-vg/network-lv /var/lib/network xfs defaults,noatime 0 0" | 
 echo "/dev/openstack-vg/dashboard-lv /var/lib/dashboard xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
 echo "/dev/openstack-vg/storage-lv /var/lib/storage xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
 echo "/dev/openstack-vg/identity-lv /var/lib/identity xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
-echo "/dev/tier3-vg/tier3-lv /var/lib/backup xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
-
-
-
-echo "/dev/ubuntu-vg/docker-lv /docker ext4 defaults,noatime 0 0" | sudo tee -a /etc/fstab
-echo "/dev/hdd-vg/media-lv /Media_Vault xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
-echo "/dev/openstack-vg/compute-lv /var/lib/compute xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
-echo "/dev/openstack-vg/network-lv /var/lib/network xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
-echo "/dev/openstack-vg/dashboard-lv /var/lib/dashboard xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
-echo "/dev/openstack-vg/storage-lv /var/lib/storage xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
-echo "/dev/openstack-vg/identity-lv /var/lib/identity xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
+echo "/dev/openstack-vg/monitoring-lv /var/lib/monitoring xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab
 echo "/dev/tier3-vg/tier3-lv /var/lib/backup xfs defaults,noatime 0 0" | sudo tee -a /etc/fstab

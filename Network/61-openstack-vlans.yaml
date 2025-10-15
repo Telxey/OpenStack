@@ -1,0 +1,71 @@
+# OpenStack VLAN configuration
+network:
+  version: 2
+  renderer: networkd
+  vlans:
+    # Ceph storage network (VLAN 100) - Using storage delegated prefix
+    vlan-ceph:
+      id: 100
+      link: eno1
+      mtu: 1500
+      dhcp4: no
+      addresses: 
+        - "10.10.100.1/24"
+        - "2600:1700:5adb:700b::1/64"  # Storage subnet from delegated prefix
+        - "fd00:0100::1/64"  # ULA backup
+    
+    # Internal tenant network (VLAN 200) - Using tenant delegated prefix
+    vlan-int:
+      id: 200
+      link: enxa0cec8c2aeaf
+      mtu: 1500
+      dhcp4: no
+      addresses: 
+        - "10.10.200.1/24"
+        - "2600:1700:5adb:7009::200:1/64"  # Tenant subnet with VLAN ID embedded
+        - "fd00:0200::1/64"  # ULA backup
+    
+    # External network (VLAN 300) - Using primary network
+    vlan-ext:
+      id: 300
+      link: eno1
+      mtu: 1500
+      dhcp4: no
+      addresses: 
+        - "10.10.30.1/24"
+        - "2600:1700:5adb:7000::300:1/64"  # Main subnet with VLAN ID embedded
+        - "fd00:0300::1/64"  # ULA backup
+    
+    # API network (VLAN 400) - Using API delegated prefix
+    vlan-api:
+      id: 400
+      link: eno1
+      mtu: 1500
+      dhcp4: no
+      addresses: 
+        - "10.10.40.1/24"
+        - "2600:1700:5adb:7008::400:1/64"  # API subnet with VLAN ID embedded
+        - "fd00:0400::1/64"  # ULA backup
+    
+    # PXE boot network (VLAN 500) - Using primary network
+    vlan-pxe:
+      id: 500
+      link: eno1
+      mtu: 1500
+      dhcp4: no
+      addresses: 
+        - "100.64.16.1/24"
+        - "2600:1700:5adb:7000::500:1/64"  # Main subnet with VLAN ID embedded
+        - "fd00:0500::1/64"  # ULA backup
+
+    # External VM access (VLAN 600) - Using tenant delegated prefix
+    vlan-extvm:
+      id: 600
+      link: eno1
+      mtu: 1500
+      dhcp4: no
+      addresses: 
+        - "10.10.60.1/24"  # IPv4 subnet for this segment
+        - "2600:1700:5adb:7009::600:1/64"  # Provider address for VM subnet
+        - "fd00:0600::1/64"  # ULA backup
+

@@ -1,0 +1,17 @@
+ content: |
+      network:
+        version: 2
+        ethernets:
+          ens3:
+            dhcp4: false
+            dhcp6: true
+            accept-ra: true
+            addresses: []
+            nameservers:
+              addresses: [
+                # DNS64 servers (Cloudflare & Google)
+                2606:4700:4700::64, 2606:4700:4700::6400,
+                2001:4860:4860::6464, 2001:4860:4860::64
+              ]
+
+

@@ -1,0 +1,29 @@
+# Fallback configuration for remote management
+# DO NOT MODIFY - This ensures remote access is maintained
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eno1:
+      match:
+        macaddress: "b4:2e:99:ef:13:c6"
+      dhcp4: no 
+      addresses: 
+        - "192.168.0.55/24"
+        - "2600:1700:5adb:7000::fefa/64"  # Primary IP on main subnet
+      routes:
+        - to: default
+          via: "192.168.0.254"
+        - to: "::/0"
+          via: "2600:1700:5adb:7000::1"  # Carrier-provided gateway
+      nameservers:
+        addresses: [
+          # IPv4 DNS servers
+          1.1.1.1, 9.9.9.9,
+          # IPv6 DNS servers
+          2606:4600:4600::1111, 2620:fe::9,
+          # DNS64 servers (Cloudflare & Google)
+          2606:4700:4700::64, 2606:4700:4700::6400,
+          2001:4860:4860::6464, 2001:4860:4860::64
+        ]
+      

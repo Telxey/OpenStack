@@ -1,0 +1,17 @@
+neutron-api:
+  options:
+    flat-network-providers: "physnet1,physnet2"
+    enable-ml2-vxlan: true
+    neutron-security-groups: true
+    enable-ipv6: true
+    ipv6-address-mode: "slaac,dhcpv6-stateful,dhcpv6-stateless"
+    
+neutron-gateway:
+  options:
+    bridge-mappings: "physnet1:br-ext,physnet2:br-int"
+    data-port: "eno1:br-ext enxa0cec8c2aeaf:br-int"
+    
+ironic-conductor:
+  options:
+    provisioning-network: "100.64.16.0/24,2600:1700:5adb:500::/64"
+    cleaning-network: "100.64.16.0/24,2600:1700:5adb:500::/64"

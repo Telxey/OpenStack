@@ -1,0 +1,25 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotfire
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Local development
+*.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

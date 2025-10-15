@@ -1,0 +1,16 @@
+# OpenStack secondary NIC configuration
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enxa0cec8c2aeaf:
+      match:
+        macaddress: "a0:ce:c8:c2:ae:af"
+      dhcp4: yes
+      mtu: 1500
+      addresses: 
+        - "172.16.0.1/24"
+        - "2600:1700:5adb:7009::1/64"  # Using delegated prefix for tenant network
+        - "fd00:7001::beef/64"  # ULA backup
+
+        
